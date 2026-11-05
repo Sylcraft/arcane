@@ -22,7 +22,11 @@ Les tests couvrent les tracés et interruptions Air Canvas, la simulation des ef
 - Ressources MediaPipe : requêtes HEAD HTTP 200 pour le WASM SIMD, son chargeur et le modèle distant. Cela vérifie leur disponibilité, sans prouver une inférence webcam complète.
 - Portfolio existant avec la fiche ARCANE : lint, **5 tests**, build et contrôle de publication des sorties réussis. Les routes `/`, `/creative`, `/cv` et `/projets/eclipse-chess` répondent HTTP 200 en production locale ; les médias sont accessibles et les chemins privés renvoient 404.
 - Fiche portfolio : rendus bureau et mobile contrôlés dans Chrome, sans exception JavaScript ni débordement horizontal. Les liens ARCANE attendent les URL publiques définitives.
-- GitHub Actions, déploiement Vercel ARCANE et vérifications publiques : en attente de l’accord de publication ; non exécutés à ce stade.
+- GitHub Actions : installation Linux, contrôle de publication, lint, 85 tests, audit de production et build réussis sur le commit initial publié.
+- Vercel ARCANE : déploiement de production `READY`, page publique HTTP 200, en-têtes `nosniff`, `DENY` et caméra limitée à l’origine de l’application.
+- Chrome sur la démo HTTPS : les quatre modules s’ouvrent, PixiJS indique WebGL prêt, le cristal Hologram est rendu. Aucune exception JavaScript, erreur de console, requête en échec ou réponse HTTP ≥ 400 pendant le contrôle. Pas de débordement horizontal à 768 et 390 px.
+- MediaPipe depuis la démo : téléchargement effectif des chargeurs JS, des WASM SIMD et sans SIMD et du modèle `.task`, tous HTTP 200 ; en-têtes binaires WASM vérifiés. Aucune inférence avec webcam réelle n’est revendiquée.
+- Portfolio : PR nº 10 fusionnée après réussite de la CI Quality et contrôle de l’aperçu protégé (fiche, image, liens, console et responsive). La mise en production fait l’objet d’un contrôle distinct après fusion.
 
 ## Recette avec une vraie webcam — à effectuer
 

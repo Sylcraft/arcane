@@ -6,7 +6,9 @@ Un laboratoire d’interaction gestuelle dans le navigateur : dessiner dans l’
 
 ![Interface ARCANE et sélection de ses quatre modules, caméra désactivée](docs/screenshots/tracking.png)
 
-> Projet en préparation de publication. Les liens GitHub et démo seront ajoutés après autorisation et vérification du déploiement. [Portfolio de Sylvain Goncalves](https://portfolio.fictyverse.com/).
+**[Explorer la démo](https://arcane-six-mu.vercel.app/) · [Code sur GitHub](https://github.com/Sylcraft/arcane) · [Portfolio de Sylvain Goncalves](https://portfolio.fictyverse.com/#projets)**
+
+Démo publiée sur Vercel. Les interfaces et ressources ont été contrôlées en ligne ; les interactions avec une vraie webcam restent à valider manuellement.
 
 ## Quatre façons d’explorer le geste
 
