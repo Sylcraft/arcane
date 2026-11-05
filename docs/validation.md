@@ -47,6 +47,6 @@ Vérifier l’URL publique finale, HTTP 200, les assets CSS/JS, le chargement de
 
 ## Audit des dépendances — 5 novembre 2026
 
-L’audit npm de production ne signale aucune vulnérabilité. L’audit complet signale 7 entrées modérées dans la chaîne de développement `typescript-eslint → minimatch`, sans vulnérabilité élevée ou critique. Elles correspondent à [GHSA-g3hv-75wg-m249](https://github.com/advisories/GHSA-g3hv-75wg-m249), un risque d’amplification de motifs glob. Aucun motif fourni par un visiteur ne passe dans cette chaîne de lint.
+Lors de la publication initiale, l’audit npm de production ne signalait aucune vulnérabilité et l’audit complet signalait 7 entrées modérées dans la chaîne de développement `typescript-eslint → minimatch`. Elles correspondaient à [GHSA-g3hv-75wg-m249](https://github.com/advisories/GHSA-g3hv-75wg-m249), un risque d’amplification de motifs glob. Aucun motif fourni par un visiteur ne passe dans cette chaîne de lint.
 
-Le correctif automatique proposé rétrograde `typescript-eslint` ; il n’a pas été appliqué. Réexaminer une mise à jour compatible de cette chaîne avant d’étendre l’outillage. L’audit complet reste une réserve documentée ; la CI bloque sur les alertes de production élevées ou critiques.
+La [passe de stabilisation](stabilization.md) corrige cette chaîne par un override limité à son consommateur typescript-estree, vérifié avec le parser typé. L’audit complet local ne signale désormais aucune vulnérabilité. Le correctif automatique qui rétrogradait typescript-eslint n’a pas été appliqué.

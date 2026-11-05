@@ -63,14 +63,15 @@ export class MagicOrb {
         : hands.find((h) => h.label === this.selected);
     if (
       !hand ||
+      !hand.label ||
+      hands.filter((candidate) => candidate.label === hand.label).length !==
+        1 ||
       !isOpenPalm(hand.geometry, !!this.target) ||
       hand.landmarks.length !== 21 ||
       hand.landmarks.some((p) => ![p.x, p.y, p.z].every(Number.isFinite))
     ) {
       this.target = undefined;
       // Retain identity while fading; never jump between two visible hands.
-      if (!hands.some((h) => h.label === this.selected))
-        this.selected = undefined;
       return;
     }
     this.selected = hand.label;
@@ -85,6 +86,8 @@ export class MagicOrb {
       this.x = x;
       this.y = y;
       this.radius = radius;
+      // A stopped renderer has no useful previous frame for a new appearance.
+      this.lastFrame = undefined;
     }
     this.target = { x, y, radius };
     this.lastSample = now;
