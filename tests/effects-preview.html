@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>ARCANE — GPU effects QA</title>
+    <style>
+      body {
+        margin: 0;
+        background: #080d16;
+        color: #dceff5;
+        font: 14px system-ui;
+        padding: 28px;
+      }
+      main {
+        max-width: 1100px;
+        margin: auto;
+      }
+      h1 {
+        font-size: 25px;
+        letter-spacing: 3px;
+      }
+      p {
+        color: #8ca5b3;
+      }
+      nav {
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+        margin: 22px 0;
+      }
+      button {
+        padding: 12px 18px;
+        border-radius: 7px;
+        background: #122630;
+        color: #aeeff3;
+        border: 1px solid #386064;
+        cursor: pointer;
+      }
+      button[aria-pressed="true"] {
+        background: #62efdf;
+        color: #10222a;
+      }
+      canvas {
+        width: 100%;
+        display: block;
+        aspect-ratio: 16/9;
+        border: 1px solid #294451;
+        border-radius: 12px;
+        background: radial-gradient(ellipse, #102237, #080d16);
+      }
+      #status {
+        font-family: monospace;
+      }
+      small {
+        color: #7b929c;
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <h1>ARCANE / GPU EFFECTS QA</h1>
+      <p>
+        Trajectoire scriptée de validation du rendu PixiJS. Aucune webcam ni
+        détection de mains.
+      </p>
+      <nav>
+        <button data-brush="energy-ribbon" aria-pressed="true">
+          Energy Ribbon</button
+        ><button data-brush="lightning" aria-pressed="false">Lightning</button
+        ><button data-brush="cosmic-trail" aria-pressed="false">
+          Cosmic Trail</button
+        ><button id="clear">Effacer</button
+        ><button id="pause">Suspendre l’émission</button>
+      </nav>
+      <canvas id="effects"></canvas>
+      <p id="status">Initialisation WebGL…</p>
+      <small
+        >Les rubans/éclairs se figent ; la poussière cosmique disparaît. Cette
+        page de développement ne mesure pas les performances du hand
+        tracking.</small
+      >
+    </main>
+    <script type="module" src="/src/effectsPreview.ts"></script>
+  </body>
+</html>
