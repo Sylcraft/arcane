@@ -65,3 +65,50 @@ test("hand identity survives reordered detections", () => {
   orb.advance(33);
   assert.ok(orb.x < 0.4);
 });
+
+test("a second hand cannot steal the orb while the owner is fading", () => {
+  const orb = new MagicOrb();
+  const right = hand(0.3),
+    left = { ...hand(0.8), label: "Left" };
+  orb.update([right], 0);
+  orb.advance(0);
+  const originalX = orb.x,
+    opacity = orb.opacity;
+  orb.update([left], 33);
+  orb.advance(33);
+  orb.update([left], 66);
+  orb.advance(66);
+  assert.equal(orb.x, originalX);
+  assert.ok(orb.opacity < opacity);
+  orb.advance(2000);
+  orb.update([left], 2033);
+  orb.advance(2033);
+  assert.ok(orb.x > 0.7);
+  assert.ok(orb.opacity > 0 && orb.opacity < 0.3);
+});
+
+test("reappearing after a long idle keeps a gradual fade in", () => {
+  const orb = new MagicOrb();
+  orb.update([hand()], 0);
+  orb.advance(0);
+  orb.update([], 33);
+  orb.advance(2000);
+  assert.equal(orb.hasWork, false);
+  orb.update([hand(0.8)], 10000);
+  orb.advance(10000);
+  assert.ok(orb.opacity > 0 && orb.opacity < 0.3);
+  assert.ok(orb.x > 0.7);
+});
+
+test("ambiguous handedness fades instead of jumping to another palm", () => {
+  const orb = new MagicOrb();
+  const original = hand(0.3);
+  orb.update([original], 0);
+  orb.advance(0);
+  const x = orb.x,
+    opacity = orb.opacity;
+  orb.update([hand(0.8), original], 33);
+  orb.advance(33);
+  assert.equal(orb.x, x);
+  assert.ok(orb.opacity < opacity);
+});

@@ -424,7 +424,8 @@ export function useHandTracking() {
               }));
               hologram.setVideoSize(source.videoWidth, source.videoHeight);
               if (modeRef.current === "magic")
-                magic.current.update(hands, sample.timestamp);
+                // Expiry starts when the result arrives, not before inference.
+                magic.current.update(hands, performance.now());
               const cursor =
                 modeRef.current === "magic"
                   ? undefined
